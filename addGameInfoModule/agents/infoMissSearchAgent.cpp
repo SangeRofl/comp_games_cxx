@@ -23,7 +23,6 @@ SC_AGENT_IMPLEMENTATION(AinfoMissSearchAgent)
 {
   if (!edgeAddr.IsValid())
     return SC_RESULT_ERROR;
-    system("echo 1");
   ScAddr questionNode = ms_context->GetEdgeTarget(edgeAddr);
   ScAddr game = IteratorUtils::getFirstFromSet(ms_context.get(), questionNode);
   if (!game.IsValid())
@@ -33,9 +32,8 @@ SC_AGENT_IMPLEMENTATION(AinfoMissSearchAgent)
   ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, game);
   
   ScIterator5Ptr age_rating_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_age_rating);;
-  if(age_rating_it5->Next())
+  if(!age_rating_it5->Next())
   {	
-  	system("echo 2");
   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_age_rating, game);
   	ScAddr edgeAd, a;
   	auto check = [](ScAddr const & listenAddr,
