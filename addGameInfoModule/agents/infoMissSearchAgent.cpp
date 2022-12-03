@@ -34,27 +34,16 @@ SC_AGENT_IMPLEMENTATION(AinfoMissSearchAgent)
   ScIterator5Ptr age_rating_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_age_rating);;
   if(!age_rating_it5->Next())
   {	
-  	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_age_rating, game);
-  	ScAddr edgeAd, a;
-  	auto check = [](ScAddr const & listenAddr,
-                ScAddr const & edgeAddres,
-                ScAddr const & otherAdd)
-	{
-	  if(edgeAddres.IsValid())
-	  	return true;
-	  else
-	  	return false; // return true or false depending on condition
-	};
-	ScWaitCondition<ScEventAddInputEdge> waiter(*ms_context, game, SC_WAIT_CHECK(check));
-	waiter.Wait();
-	system("echo 3");
-	if(age_rating_it5->Next())
-	{
-		ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5->Get(1));
-		ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5->Get(2));
-		ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5->Get(3));
-		ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5->Get(4));
-	}
+  	ScAddr ageRating = AgentUtils::initAgentAndWaitResult(ms_context.get(),Keynodes::question_add_info_age_rating, {game});
+  	GenerationUtils::addSetToOutline(ms_context.get(), ageRating, answer);
+	//if(age_rating_it5_1->Next())
+	//{
+	//	system("echo 15");
+	//	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5_1->Get(1));
+	//	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5_1->Get(2));
+	//	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5_1->Get(3));
+	//	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5_1->Get(4));
+	//}
   }
   
   //ScAddr answer = ms_context->CreateNode(ScType::NodeConstStruct);

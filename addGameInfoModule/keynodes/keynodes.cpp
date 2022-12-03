@@ -24,4 +24,5 @@ ScAddr Keynodes::nrel_source_of_information;
 ScAddr Keynodes::nrel_main_idtf;
 ScAddr Keynodes::sc_node_not_relation;
 ScAddr Keynodes::binary_string;
+ScAddr Keynodes::lang_ru;
 }

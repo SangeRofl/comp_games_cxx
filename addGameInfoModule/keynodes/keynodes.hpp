@@ -25,7 +25,10 @@ public:
   	
 	SC_PROPERTY(Keynode("nrel_rating"), ForceCreate)
   static ScAddr nrel_rating;
-  
+  	
+  	SC_PROPERTY(Keynode("lang_ru"), ForceCreate)
+  static ScAddr lang_ru;
+  	
   	SC_PROPERTY(Keynode("nrel_review"), ForceCreate)
   static ScAddr nrel_review;
   	

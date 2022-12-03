@@ -10,7 +10,7 @@ if args.name == "ageRating":
     r = requests.get(args.url)
     soup = BeautifulSoup(r.text, 'html.parser')
     items = soup.find_all('div', class_='age-restrictions')
-    f = open("age_rating.txt", "w")
+    f = open("../problem-solver/cxx/addGameInfoModule/agents/py_utils/data/age_rating.txt", "w")
     for item in items:
       f.write(item.text.strip())
     f.close()
