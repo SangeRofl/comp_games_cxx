@@ -34,9 +34,10 @@ SC_AGENT_IMPLEMENTATION(AinfoMissSearchAgent)
   ScIterator5Ptr age_rating_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_age_rating);;
   if(!age_rating_it5->Next())
   {	
-  	ScAddr ageRating = AgentUtils::initAgentAndWaitResult(ms_context.get(),Keynodes::question_add_info_age_rating, {game});
-  	GenerationUtils::addSetToOutline(ms_context.get(), ageRating, answer);
-	//if(age_rating_it5_1->Next())
+  	ScAddr ageRating_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+  	AgentUtils::assignParamsToQuestionNode(ms_context.get(),  ageRating_questionNode, {game});
+  	
+  	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_age_rating, ageRating_questionNode);
 	//{
 	//	system("echo 15");
 	//	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5_1->Get(1));
