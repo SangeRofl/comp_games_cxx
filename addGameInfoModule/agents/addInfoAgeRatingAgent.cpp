@@ -70,6 +70,20 @@ SC_AGENT_IMPLEMENTATION(addInfoAgeRatingAgent)
   				}
   				in.close();			
 		   	}
+		   	if(value == "steam")
+		   	{
+		   		system("echo 5");
+		  		ScLink url_link(*ms_context, url);
+		  		std::string const text_url = link.Get<std::string>();
+		  		system(("python3 ../problem-solver/cxx/addGameInfoModule/agents/py_utils/steam1.py -agent=ageRating -site="+val).c_str());
+		  		std::ifstream in("../problem-solver/cxx/addGameInfoModule/agents/py_utils/data/age_rating.txt");
+  				if (in.is_open())
+  				{
+  				system("echo 6");
+    				getline(in, ageRating_str);
+  				}
+  				in.close();			
+		   	}
 		   	else
 		   		continue;
 		   	//ScAddr ageRating = ms_context->CreateLink();
