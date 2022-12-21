@@ -9,15 +9,15 @@
 #include <sc-memory/kpm/sc_agent.hpp>
 
 #include "keynodes/keynodes.hpp"
-#include "infoMissSearchAgent.generated.hpp"
+#include "addInfoSupportedLanguageAgent.generated.hpp"
 
 namespace addGameInfoModule
 {
 
-class AinfoMissSearchAgent : public ScAgent
+class addInfoSupportedLanguageAgent : public ScAgent
 {
-  SC_CLASS(Agent, Event(Keynodes::question_add_game_info, ScEvent::Type::AddOutputEdge))
+  SC_CLASS(Agent, Event(Keynodes::question_add_info_supported_language, ScEvent::Type::AddOutputEdge))
   SC_GENERATED_BODY()
 };
 
-}
+} // namespace exampleModule

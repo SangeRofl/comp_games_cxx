@@ -9,7 +9,7 @@
 #include <sc-agents-common/utils/IteratorUtils.hpp>
 #include <sc-agents-common/utils/CommonUtils.hpp>
 #include <sc-agents-common/keynodes/coreKeynodes.hpp>
-#include "addInfoAgeRatingAgent.hpp"
+#include "addInfoReviewAgent.hpp"
 #include "sc-core/sc_helper.h"
 #include <sc-memory/sc_link.hpp>
 #include <sc-memory/sc_wait.hpp>
@@ -23,7 +23,7 @@ using namespace utils;
 namespace addGameInfoModule
 {
 
-SC_AGENT_IMPLEMENTATION(addInfoAgeRatingAgent)
+SC_AGENT_IMPLEMENTATION(addInfoReviewAgent)
 {
 
   
@@ -55,35 +55,35 @@ SC_AGENT_IMPLEMENTATION(addInfoAgeRatingAgent)
   			ScAddr sheaf = it5_2->Get(2);
 		  	ScLink link(*ms_context, sheaf);
 		  	std::string const value = link.Get<std::string>();
-		  	std::string ageRating_str;
-		   	if(value == "gog")
+		  	std::string Review_str;
+		   	if(value == "steam")
 		   	{
 		   		system("echo 5");
 		  		ScLink url_link(*ms_context, url);
 		  		std::string const text_url = link.Get<std::string>();
-		  		system(("python3 ../problem-solver/cxx/addGameInfoModule/agents/py_utils/gog.py -agent=ageRating -site="+val).c_str());
-		  		std::ifstream in("../problem-solver/cxx/addGameInfoModule/agents/py_utils/data/age_rating.txt");
+		  		system(("python3 ../problem-solver/cxx/addGameInfoModule/agents/py_utils/steam.py -agent=Review -site="+val).c_str());
+		  		std::ifstream in("../problem-solver/cxx/addGameInfoModule/agents/py_utils/data/review.txt");
   				if (in.is_open())
   				{
   				system("echo 6");
-    				getline(in, ageRating_str);
+    				Review_str.assign((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
   				}
   				in.close();			
 		   	}
 		   	else
 		   		continue;
-  			ScAddr ageRating = ms_context->CreateNode(ScType::NodeConst);
-  			CommonUtils::setMainIdtf(ms_context.get(), ageRating, ageRating_str, {Keynodes::lang_ru});
+  			ScAddr Review = ms_context->CreateNode(ScType::NodeConst);
+  			CommonUtils::setMainIdtf(ms_context.get(), Review, Review_str, {Keynodes::lang_ru});
   			system("echo 7");
-		  	ScAddr ageRatingText_edge = ms_context->CreateEdge(ScType::EdgeDCommonConst, game, ageRating);
+		  	ScAddr ReviewText_edge = ms_context->CreateEdge(ScType::EdgeDCommonConst, game, Review);
 		  	system("echo 8");
-		   	ScAddr ageRatingText_edgeAccess=ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::nrel_age_rating, ageRatingText_edge);
+		   	ScAddr ReviewText_edgeAccess=ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::nrel_review, ReviewText_edge);
 		   	system("echo 9");
 		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, game);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ageRating);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, Keynodes::nrel_age_rating);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ageRatingText_edge);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ageRatingText_edgeAccess);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, Review);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, Keynodes::nrel_review);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ReviewText_edge);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ReviewText_edgeAccess);
 		   	break;
 		}
   	}

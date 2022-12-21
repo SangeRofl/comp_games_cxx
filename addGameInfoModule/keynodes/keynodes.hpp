@@ -20,14 +20,23 @@ class Keynodes : public ScObject
   SC_GENERATED_BODY()
 
 public:
+	SC_PROPERTY(Keynode("question_add_info_game_platforms"), ForceCreate)
+  static ScAddr question_add_info_game_platforms;
+	
 	SC_PROPERTY(Keynode("question_add_game_info"), ForceCreate)
   static ScAddr question_add_game_info;
+  	
+  	SC_PROPERTY(Keynode("question_add_game_marketplace"), ForceCreate)
+  static ScAddr question_add_game_marketplace;
   	
 	SC_PROPERTY(Keynode("nrel_rating"), ForceCreate)
   static ScAddr nrel_rating;
   	
   	SC_PROPERTY(Keynode("lang_ru"), ForceCreate)
   static ScAddr lang_ru;
+  
+ 	SC_PROPERTY(Keynode("lang_en"), ForceCreate)
+  static ScAddr lang_en;
   	
   	SC_PROPERTY(Keynode("nrel_review"), ForceCreate)
   static ScAddr nrel_review;
@@ -54,6 +63,9 @@ public:
   	SC_PROPERTY(Keynode("question_add_info_age_rating"), ForceCreate)
   static ScAddr question_add_info_age_rating;
   
+  	SC_PROPERTY(Keynode("question_add_game_rating"), ForceCreate)
+    static ScAddr question_add_game_rating;
+  
   	SC_PROPERTY(Keynode("nrel_source_of_information"), ForceCreate)
   static ScAddr nrel_source_of_information;
   
@@ -66,8 +78,18 @@ public:
   	SC_PROPERTY(Keynode("sc_node_not_relation"), ForceCreate)
   static ScAddr sc_node_not_relation;
   
-    SC_PROPERTY(Keynode("question_add_info_price"), ForceCreate)
+    	SC_PROPERTY(Keynode("question_add_info_price"), ForceCreate)
   static ScAddr question_add_info_price;
+  
+  	SC_PROPERTY(Keynode("question_add_info_review"), ForceCreate)
+  static ScAddr question_add_info_review;
+  
+  	SC_PROPERTY(Keynode("question_add_info_supported_language"), ForceCreate)
+  static ScAddr question_add_info_supported_language;
+  
+  	SC_PROPERTY(Keynode("question_add_info_system_requirements"), ForceCreate)
+  static ScAddr question_add_info_system_requirements;
+
 };
 
 } // namespace exampleModule

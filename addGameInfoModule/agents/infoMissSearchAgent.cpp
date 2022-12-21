@@ -10,9 +10,11 @@
 #include "infoMissSearchAgent.hpp"
 #include <sc-memory/sc_link.hpp>
 #include <sc-memory/sc_wait.hpp>
+#include <sc-memory/kpm/sc_agent.hpp>
 #include<iostream>
 #include<fstream>
 #include<string>
+#include <unistd.h>
 using namespace std;
 using namespace utils;
 
@@ -34,10 +36,16 @@ SC_AGENT_IMPLEMENTATION(AinfoMissSearchAgent)
   ScIterator5Ptr age_rating_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_age_rating);;
   if(!age_rating_it5->Next())
   {	
+  	system("echo 10");
+  	//ScAddr questionNode = ScAgentAction::CreateCommand(*ms_context, Keynodes::nrel_age_rating, {game});
+  	//system("echo 11");
+  	//ScAgentAction::InitiateCommandWait(*ms_context, questionNode, 10000);
   	ScAddr ageRating_questionNode = AgentUtils::createQuestionNode(ms_context.get());
   	AgentUtils::assignParamsToQuestionNode(ms_context.get(),  ageRating_questionNode, {game});
-  	
+  	//system("echo 11");
   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_age_rating, ageRating_questionNode);
+	//system("echo 12");
+	//ScIterator5Ptr age_rating_it5_1 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_age_rating);;
 	//{
 	//	system("echo 15");
 	//	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, age_rating_it5_1->Get(1));
@@ -47,6 +55,69 @@ SC_AGENT_IMPLEMENTATION(AinfoMissSearchAgent)
 	//}
   }
   
+  //RATING
+  ScIterator5Ptr game_rating_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_rating);;
+  if(!game_rating_it5->Next())
+  {
+      ScAddr gameRating_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+      AgentUtils::assignParamsToQuestionNode(ms_context.get(),  gameRating_questionNode, {game});
+
+      ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_game_rating, gameRating_questionNode);
+  }
+  //MARKETPLACE
+  ScIterator5Ptr game_marketplace_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_distributor);;
+  if(!game_marketplace_it5->Next())
+  {
+      ScAddr gameMarketplace_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+      AgentUtils::assignParamsToQuestionNode(ms_context.get(),  gameMarketplace_questionNode, {game});
+
+      ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_game_marketplace, gameMarketplace_questionNode);
+  }
+  //PLATFROM
+  ScIterator5Ptr game_paltform_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_platform);;
+  if(!game_paltform_it5->Next())
+  {
+      ScAddr gamePlatform_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+      AgentUtils::assignParamsToQuestionNode(ms_context.get(),  gamePlatform_questionNode, {game});
+
+      ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_game_platforms, gamePlatform_questionNode);
+  }
+  //REVIEW
+  ScIterator5Ptr game_review_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_review);;
+  if(!game_review_it5->Next())
+  {
+      ScAddr gameReview_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+      AgentUtils::assignParamsToQuestionNode(ms_context.get(),  gameReview_questionNode, {game});
+
+      ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_review, gameReview_questionNode);
+  }
+  //LANGUAGE
+  ScIterator5Ptr game_language_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_supported_language);;
+  if(!game_language_it5->Next())
+  {
+      ScAddr gameLanguage_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+      AgentUtils::assignParamsToQuestionNode(ms_context.get(),  gameLanguage_questionNode, {game});
+
+      ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_supported_language, gameLanguage_questionNode);
+  }
+  //SYSTEM REQUIREMENTS
+  ScIterator5Ptr game_requirements_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_minimal_system_requirements);;
+  if(!game_requirements_it5->Next())
+  {
+      ScAddr gameRequirements_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+      AgentUtils::assignParamsToQuestionNode(ms_context.get(),  gameRequirements_questionNode, {game});
+
+      ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_system_requirements, gameRequirements_questionNode);
+  }
+  //PRICE
+  ScIterator5Ptr game_price_it5 = ms_context->Iterator5(game, ScType::EdgeDCommonConst, ScType::Unknown, ScType::EdgeAccessConstPosPerm, Keynodes::nrel_price);;
+  if(!game_price_it5->Next())
+  {
+      ScAddr gamePrice_questionNode = AgentUtils::createQuestionNode(ms_context.get());
+      AgentUtils::assignParamsToQuestionNode(ms_context.get(),  gamePrice_questionNode, {game});
+
+      ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::question_add_info_price, gamePrice_questionNode);
+  }
   //ScAddr answer = ms_context->CreateNode(ScType::NodeConstStruct);
   //ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, param, Keynodes::price_5);
   //ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, Keynodes::nrel_subdividing);

@@ -7,17 +7,16 @@
 #pragma once
 
 #include <sc-memory/kpm/sc_agent.hpp>
-
 #include "keynodes/keynodes.hpp"
-#include "infoMissSearchAgent.generated.hpp"
+#include "addGameMarketplaceAgent.generated.hpp"
 
 namespace addGameInfoModule
 {
 
-class AinfoMissSearchAgent : public ScAgent
-{
-  SC_CLASS(Agent, Event(Keynodes::question_add_game_info, ScEvent::Type::AddOutputEdge))
-  SC_GENERATED_BODY()
-};
+    class addGameMarketplaceAgent : public ScAgent
+    {
+        SC_CLASS(Agent, Event(Keynodes::question_add_game_marketplace, ScEvent::Type::AddOutputEdge))
+        SC_GENERATED_BODY()
+    };
 
-}
+} // namespace exampleModule
