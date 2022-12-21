@@ -9,7 +9,7 @@
 #include <sc-agents-common/utils/IteratorUtils.hpp>
 #include <sc-agents-common/utils/CommonUtils.hpp>
 #include <sc-agents-common/keynodes/coreKeynodes.hpp>
-#include "addInfoAgeRatingAgent.hpp"
+#include "addInfoSystemRequirementsAgent.hpp"
 #include "sc-core/sc_helper.h"
 #include <sc-memory/sc_link.hpp>
 #include <sc-memory/sc_wait.hpp>
@@ -23,7 +23,7 @@ using namespace utils;
 namespace addGameInfoModule
 {
 
-SC_AGENT_IMPLEMENTATION(addInfoAgeRatingAgent)
+SC_AGENT_IMPLEMENTATION(addInfoSystemRequirementsAgent)
 {
 
   
@@ -55,49 +55,35 @@ SC_AGENT_IMPLEMENTATION(addInfoAgeRatingAgent)
   			ScAddr sheaf = it5_2->Get(2);
 		  	ScLink link(*ms_context, sheaf);
 		  	std::string const value = link.Get<std::string>();
-		  	std::string ageRating_str;
-		   	if(value == "gog")
-		   	{
-		   		system("echo 5");
-		  		ScLink url_link(*ms_context, url);
-		  		std::string const text_url = link.Get<std::string>();
-		  		system(("python3 ../problem-solver/cxx/addGameInfoModule/agents/py_utils/gog.py -agent=ageRating -site="+val).c_str());
-		  		std::ifstream in("../problem-solver/cxx/addGameInfoModule/agents/py_utils/data/age_rating.txt");
-  				if (in.is_open())
-  				{
-  				system("echo 6");
-    				getline(in, ageRating_str);
-  				}
-  				in.close();			
-		   	}
+		  	std::string system_requirements_str;
 		   	if(value == "steam")
 		   	{
 		   		system("echo 5");
 		  		ScLink url_link(*ms_context, url);
 		  		std::string const text_url = link.Get<std::string>();
-		  		system(("python3 ../problem-solver/cxx/addGameInfoModule/agents/py_utils/steam1.py -agent=ageRating -site="+val).c_str());
-		  		std::ifstream in("../problem-solver/cxx/addGameInfoModule/agents/py_utils/data/age_rating.txt");
+		  		system(("python3 ../problem-solver/cxx/addGameInfoModule/agents/py_utils/steam.py -agent=systemRequirements -site="+val).c_str());
+		  		std::ifstream in("../problem-solver/cxx/addGameInfoModule/agents/py_utils/data/system_requirements.txt");
   				if (in.is_open())
   				{
   				system("echo 6");
-    				getline(in, ageRating_str);
+    				system_requirements_str.assign((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
   				}
   				in.close();			
 		   	}
 		   	else
 		   		continue;
-  			ScAddr ageRating = ms_context->CreateNode(ScType::NodeConst);
-  			CommonUtils::setMainIdtf(ms_context.get(), ageRating, ageRating_str, {Keynodes::lang_ru});
+  			ScAddr systemRequirements = ms_context->CreateNode(ScType::NodeConst);
+  			CommonUtils::setMainIdtf(ms_context.get(), systemRequirements, system_requirements_str, {Keynodes::lang_ru});
   			system("echo 7");
-		  	ScAddr ageRatingText_edge = ms_context->CreateEdge(ScType::EdgeDCommonConst, game, ageRating);
+		  	ScAddr systemRequirementsText_edge = ms_context->CreateEdge(ScType::EdgeDCommonConst, game, systemRequirements);
 		  	system("echo 8");
-		   	ScAddr ageRatingText_edgeAccess=ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::nrel_age_rating, ageRatingText_edge);
+		   	ScAddr systemRequirementsText_edgeAccess=ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, Keynodes::nrel_minimal_system_requirements, systemRequirementsText_edge);
 		   	system("echo 9");
 		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, game);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ageRating);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, Keynodes::nrel_age_rating);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ageRatingText_edge);
-		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, ageRatingText_edgeAccess);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, systemRequirements);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, Keynodes::nrel_minimal_system_requirements);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, systemRequirementsText_edge);
+		   	ms_context->CreateEdge(ScType::EdgeAccessConstPosPerm, answer, systemRequirementsText_edgeAccess);
 		   	break;
 		}
   	}

@@ -8,7 +8,8 @@
 
 namespace addGameInfoModule
 {
-
+ScAddr Keynodes::question_add_info_game_platforms;
+ScAddr Keynodes::question_add_game_marketplace;
 ScAddr Keynodes::question_add_game_info;
 ScAddr Keynodes::nrel_rating;
 ScAddr Keynodes::nrel_review;
@@ -20,9 +21,14 @@ ScAddr Keynodes::nrel_minimal_system_requirements;
 ScAddr Keynodes::nrel_age_rating;
 ScAddr Keynodes::question_add_info_age_rating;
 ScAddr Keynodes::question_add_info_price;
+ScAddr Keynodes::question_add_game_rating;
 ScAddr Keynodes::nrel_source_of_information;
 ScAddr Keynodes::nrel_main_idtf;
 ScAddr Keynodes::sc_node_not_relation;
 ScAddr Keynodes::binary_string;
 ScAddr Keynodes::lang_ru;
+ScAddr Keynodes::lang_en;
+ScAddr Keynodes::question_add_info_review;
+ScAddr Keynodes::question_add_info_supported_language;
+ScAddr Keynodes::question_add_info_system_requirements;
 }
