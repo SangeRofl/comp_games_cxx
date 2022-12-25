@@ -2,18 +2,18 @@ ui_menu_add_info_age_rating <- ui_user_command_class_atom; ui_user_command_class
 
 ui_menu_add_info_age_rating
 => nrel_main_idtf: 
-	[Добавить возрастной рейтинг]
+	[Добавить информацию об возрастном рейтинге]
 	(* <- lang_ru;; *);
 => nrel_idtf: 
-	[Запрос добавления возрастного рейтинга игры]
+	[Запрос добавления информации об возрастном рейтинге]
 	(* <- lang_ru;; *);;
 
 ui_menu_add_info_age_rating
 => nrel_main_idtf: 
-	[Add age rating to this game]
+	[Add age rating]
 	(* <- lang_en;; *);
 => nrel_idtf: 
-	[Request adds age rating to the game]
+	[Request adds age rating]
 	(* <- lang_en;; *);;
 
 ui_menu_add_info_age_rating => ui_nrel_command_template:
@@ -25,5 +25,5 @@ ui_menu_add_info_age_rating => ui_nrel_command_template:
 		._question_add_info_age_rating_instance _<- question;;
 	*];;
 
-ui_menu_add_info_age_rating => ui_nrel_command_lang_template: [Добавить возрастной рейтинг к $ui_arg_1] (* <- lang_ru;; *);;
-ui_menu_add_info_age_rating => ui_nrel_command_lang_template: [Add age rating to $ui_arg_1] (* <- lang_en;; *);;
+ui_menu_add_info_age_rating => ui_nrel_command_lang_template: [Добавить возрастное ограничение] (* <- lang_ru;; *);;
+ui_menu_add_info_age_rating => ui_nrel_command_lang_template: [Add age rating] (* <- lang_en;; *);;
