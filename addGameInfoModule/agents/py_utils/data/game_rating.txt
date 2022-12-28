@@ -1,19 +1,4 @@
-Metacritic: 92/100
-Destructoid: 8/10
-Edge: 8/10
-Game Informer: 75/10
-GameRevolution: 7/10
-GameSpot: 10/10
-GameTrailers: 9,8/10
-IGN: 9,3/10
-PC Gamer (US): 92/100
-Polygon: 8/10
-VideoGamer: 9/10
-AusGamers: 10/10
-3DNews: 10/10
-Канобу: 8/10
-PlayGround.ru: 9,8/10
-«Игромания»: 9/10
-Игры Mail.ru: 10/10
-IGN Russia: 10/10
-Gameguru.ru: 10/10
+Metacritic: 80/100
+Eurogamer: 7/10
+GameSpot: 7,6/10
+IGN: 8,4/10
